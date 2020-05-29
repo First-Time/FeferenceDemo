@@ -28,6 +28,7 @@ public class PhantomReferenceQueueDemo {
                 e.printStackTrace();
             }
             while (true) {
+                System.gc();
                 Reference poll = queue.poll();
                 if (poll != null) {
                     System.out.println("虚引用被回收了：" + poll);
