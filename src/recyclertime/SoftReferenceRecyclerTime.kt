@@ -1,6 +1,5 @@
 package recyclertime
 
-import java.lang.ref.PhantomReference
 import java.lang.ref.ReferenceQueue
 import java.lang.ref.SoftReference
 import java.util.concurrent.TimeUnit
@@ -12,10 +11,11 @@ import java.util.concurrent.TimeUnit
 fun main() {
     var queue = ReferenceQueue<ByteArray>()
 
-    val softReference = SoftReference(ByteArray(1024 * 1024 * 5), queue)
+    var softReference: SoftReference<ByteArray>? = SoftReference(ByteArray(1024 * 1024 * 5), queue)
 //    val softReference = SoftReference(ByteArray(1024 * 1024 * 6))
+//    softReference = null
     println("softReference = $softReference")
-    println("softReference = ${softReference.get()}")
+    println("softReference = ${softReference?.get()}")
     println("queue.poll() = ${queue.poll()}")
 
 
@@ -49,16 +49,16 @@ fun main() {
 
     TimeUnit.MILLISECONDS.sleep(300)
 
-    val bytes = ByteArray(1024 * 1024 * 6)
+//    val bytes = ByteArray(1024 * 1024 * 6)
     System.gc()
 //    val bytes = ByteArray(1024 * 1024 * 6)
 
     println()
     println("softReference = $softReference")
-    println("softReference = ${softReference.get()}")
+    println("softReference = ${softReference?.get()}")
     println("queue.poll() = ${queue.poll()}")
 
 //    val bytes = ByteArray(1024 * 1024 * 6)
-    println("bytes = $bytes")
+//    println("bytes = $bytes")
 //    System.gc()
 }

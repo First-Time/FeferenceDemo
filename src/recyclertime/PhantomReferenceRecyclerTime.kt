@@ -5,8 +5,8 @@ import java.lang.ref.ReferenceQueue
 import java.util.concurrent.TimeUnit
 
 /**
- * 虚引用在内存不足时不会被回收。
- * 在由于其他原因引发内存模型执行gc的时候，虚引用也不会被回收，但是会被放到引用队列。
+ * 虚引用对象在内存不足时不会被回收。
+ * 虚引用对象在由于其他原因引发内存模型执行gc时，虚引用也不会被回收，但是会被放到引用队列。
  */
 fun main() {
     var queue = ReferenceQueue<ByteArray>()

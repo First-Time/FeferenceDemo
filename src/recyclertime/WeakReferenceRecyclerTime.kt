@@ -1,23 +1,21 @@
 package recyclertime
 
-import java.lang.ref.PhantomReference
 import java.lang.ref.ReferenceQueue
-import java.lang.ref.SoftReference
 import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
 /**
- * 弱引用对象在内存充足时执行gc会被回收，也会放到引用队列中。
+ * 弱引用对象在内存充足时执行gc会被回收，也会放到引用队列。
  * 弱引用对象在内存不足时会被自动回收，并放到引用队列。
  */
 fun main() {
     var queue = ReferenceQueue<ByteArray>()
 
-    val weakReference = WeakReference(ByteArray(1024 * 1024 * 5), queue)
+    var weakReference: WeakReference<ByteArray>? = WeakReference(ByteArray(1024 * 1024 * 5), queue)
+//    weakReference = null
     println("softReference = $weakReference")
-    println("softReference = ${weakReference.get()}")
+    println("softReference = ${weakReference?.get()}")
     println("queue.poll() = ${queue.poll()}")
-
 
     //当不设置-Xmx10M的时候
     //当不执行gc的时候
@@ -55,7 +53,7 @@ fun main() {
 
     println()
     println("softReference = $weakReference")
-    println("softReference = ${weakReference.get()}")
+    println("softReference = ${weakReference?.get()}")
     println("queue.poll() = ${queue.poll()}")
 
     val bytes = ByteArray(1024 * 1024 * 6)
