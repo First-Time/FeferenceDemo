@@ -16,7 +16,7 @@ public class WeakReferenceDemo {
         byte[] bytes = new byte[1];
         WeakReference<byte[]> weakReference = new WeakReference<>(bytes);
         System.out.println(weakReference.get());
-//        bytes = null; //当主动将bytes置为null时，弱引用此时就会被回收
+        bytes = null; //当主动将bytes置为null时，弱引用此时就会被回收
         System.gc();
         System.out.println(bytes == null);
         System.out.println(weakReference.get());

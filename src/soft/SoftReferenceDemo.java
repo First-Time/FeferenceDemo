@@ -9,7 +9,7 @@ public class SoftReferenceDemo {
     public static void main(String[] args) {
         SoftReference<byte[]> softReference = new SoftReference<>(new byte[10 * 1024 * 1024]);
         System.out.println(softReference.get());
-//        System.gc();
+        System.gc();
         System.out.println(softReference.get());
         byte[] bytes2 = new byte[1024 * 1024 * 10];
         System.out.println(softReference.get());
